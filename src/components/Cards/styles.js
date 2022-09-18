@@ -10,6 +10,7 @@ export const Card = styled.div`
     background-color: #EBECF0;
     padding: 10px;
     border-radius: 5px;
+    max-width: 230px;
 `;
 export const InputTitle = styled.input`
     background-color: transparent;
@@ -41,11 +42,14 @@ export const TaskArea = styled.div `
 
 `
 export const EditTask = styled.div `
-    flex: 1;
     display: flex;
     flex-direction: column;
 
     textarea{
+        border: 0;
+        box-shadow: 0 0 1px #091e42;
+
+        outline: none;
         min-height: 25px;
         resize: none;
         width: 100%;
@@ -66,7 +70,6 @@ export const EditTask = styled.div `
         padding: 8px 10px;
     }
     .btnClose{
-        flex: 1;
         height: 100%;
         display: flex;
         justify-content: center;

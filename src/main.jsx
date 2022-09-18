@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { GlobalStyle } from './GlobalStyle'
+import { Provider } from 'react-redux'
+import { store } from './components/redux/Store'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <GlobalStyle/>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
+    <React.StrictMode>
+      <Provider store={store}>
+        <BrowserRouter>
+          <GlobalStyle/>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </React.StrictMode>
 )

@@ -4,7 +4,7 @@ import * as C from "./styles"
 const Tasks = (props) => {
     return (
        <C.DescriptionArea>
-            <p>{props.data}</p>
+            <p>{props.text}</p>
             <span>
                 <img src={Menu} alt="" />
             </span>

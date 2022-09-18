@@ -1,47 +1,49 @@
 import * as C from "./styles"
+
 import Tasks from "../Tasks";
-import { GrAdd, GrClose } from "react-icons/gr"
-import { useState } from "react";
 import TextareaAutosize from 'react-textarea-autosize';
 
-const tasks = [
-    {texto: "Esse recurso está sendo desenvolvido."}
-]
+import { GrAdd, GrClose } from "react-icons/gr"
 
-const Card = () => {
-    const [inputShow, setInputShow] = useState(false)
-    const [textNewTask, setTextNewTask] = useState("")
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setNameTask, setTask } from "../redux/reducers/TaskReducer";
 
-    const handleTask = () => {
-        setInputShow(true)
+
+const Card = (props) => {
+
+    const dispatch = useDispatch();
+
+    const [inputShow, setInputShow] = useState(false);
+    const [textNewTask, setTextNewTask] = useState("");
+
+
+    // MOSTRA E DESATIVA O ADICIONAR NOVA TAREFA
+    const handleShowInputAdd = () => {
+        setInputShow(!inputShow)
     }
-    const handleTaskEnd = () => {
-        setInputShow(false)
-        setTextNewTask("")
-    }
-    const sendTask = (text) => {
-        if(text != ""){
-            tasks.push({texto: `${text}`})
-        }
-        setTextNewTask("")
+
+    const handleChangeTitleTask = (e) => {
+        dispatch(setNameTask({text: e.target.value, id: props.idCard}))
     }
 
     return (
         <C.Card>
             <C.InputTitle 
-                  value="Segunda" 
+                  value={props.name}
+                  onChange={handleChangeTitleTask}
                 />
             
             <C.TaskArea>
-                   {tasks.map((item, key) => (
-                     <Tasks data={item.texto} key={key}/>
-                   ))}
+                {props.tasks.map((item, key) => (
+                    <Tasks id={item.id} text={item.text} key={key}/>
+                ))}
             </C.TaskArea>
 
             {!inputShow &&
 
             <>
-                <C.NewTask onClick={handleTask}>
+                <C.NewTask onClick={handleShowInputAdd}>
                     Adicionar uma tarefa
                     <GrAdd style={{marginLeft: "10px", fontSize: "12px"}}/>
                 </C.NewTask>
@@ -52,10 +54,10 @@ const Card = () => {
 
             {inputShow &&
                 <C.EditTask>
-                    <TextareaAutosize minRows={1} maxRows={8} value={textNewTask} onChange={(e) => setTextNewTask(e.target.value)}></TextareaAutosize>
+                    <TextareaAutosize placeholder="Insira um titulo para essa atividade" minRows={3} maxRows={8} value={textNewTask} onChange={(e) => setTextNewTask(e.target.value)}></TextareaAutosize>
                     <div className="btns">
-                        <button className="btnAdd" onClick={() => sendTask(textNewTask)}>Adicionar tarefa</button>
-                        <button className="btnClose" onClick={handleTaskEnd}><GrClose style={{color: "#fff"}}/></button>
+                        <button className="btnAdd" onClick={{}}>Adicionar tarefa</button>
+                        <button className="btnClose" onClick={handleShowInputAdd}><GrClose style={{color: "#fff"}}/></button>
                     </div>
                 </C.EditTask>
             }
