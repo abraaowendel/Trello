@@ -7,7 +7,7 @@ import { GrAdd, GrClose } from "react-icons/gr"
 
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setNameTask, setTask } from "../redux/reducers/TaskReducer";
+import { setNameTask, setTask } from "../../redux/reducers/taskReducer";
 
 
 const Card = (props) => {
@@ -25,6 +25,13 @@ const Card = (props) => {
 
     const handleChangeTitleTask = (e) => {
         dispatch(setNameTask({text: e.target.value, id: props.idCard}))
+    }
+
+    const handleAddNewTask = (e) => {
+        if(textNewTask !== ""){
+            dispatch(setTask({text: textNewTask, id: props.idCard}))
+        }
+        return setTextNewTask("")
     }
 
     return (
@@ -56,8 +63,8 @@ const Card = (props) => {
                 <C.EditTask>
                     <TextareaAutosize placeholder="Insira um titulo para essa atividade" minRows={3} maxRows={8} value={textNewTask} onChange={(e) => setTextNewTask(e.target.value)}></TextareaAutosize>
                     <div className="btns">
-                        <button className="btnAdd" onClick={{}}>Adicionar tarefa</button>
-                        <button className="btnClose" onClick={handleShowInputAdd}><GrClose style={{color: "#fff"}}/></button>
+                        <button className="btnAdd" onClick={handleAddNewTask}>Adicionar tarefa</button>
+                        <button className="btnClose" onClick={handleShowInputAdd}><GrClose/></button>
                     </div>
                 </C.EditTask>
             }

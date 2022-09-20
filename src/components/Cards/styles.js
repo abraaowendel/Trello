@@ -83,7 +83,6 @@ export const EditTask = styled.div `
         margin-right: 3px;
         &:hover{
             background-color: #026AA7;
-
         }
     }
 `
