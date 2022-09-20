@@ -2,7 +2,7 @@
 
 <!-- <img src="" alt="exemplo imagem">-->
 
-<h4>O Trello é um organizador de tarefas 
+<h4>O Trello é um organizador de tarefas ideal 
 para vc organizar seus estudos e atividades ao decorrer do seu dia.</h4>
 
 ### Tecnologias utilizadas
