@@ -15,8 +15,8 @@ para vc organizar seus estudos e atividades ao decorrer do seu dia.</h4>
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
 - [-] Modo Dark/Light
-- [-] Remover e editar tarefas
-- [-] Criar diversos cards
+- [X] Remover e editar tarefas
+- [X] Criar diversos cards
 - [-] Mover Tarefas
 - [-] Ordernar tarefas como importante ou em ordem alfábetica 
 
