@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
 export const CardArea = styled.div`
-    margin: 0 50px;
 `;
 
 export const AddCard = styled.div`
     border-radius: 5px;
     min-height: ${(props) => props.heigth};
-    min-width: 270px;
+    min-width: 230px;
     padding: 4px;
     border: 1px solid #ddd;
     color:  #000;

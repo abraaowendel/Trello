@@ -21,6 +21,7 @@ export const Template = styled.div`
 `
 export const PageContainer = styled.div`
     max-width: 1250px;
+    min-height: 100vh;
     margin: auto;
     padding: 0 5px;
 `

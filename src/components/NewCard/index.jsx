@@ -18,8 +18,10 @@ const NewCard = () => {
         if(titleCard != ""){
             dispatch(setCard({id: data.cards.length + 1, name: titleCard}))
         }
-        setTitleCard("")
+        handleShowCard();
+        setTitleCard("");
     }
+
 
     const handleShowCard = () => {
         setInputShowAdd(!inputShowAdd)
@@ -27,7 +29,7 @@ const NewCard = () => {
 
     return (
         <C.CardArea >
-            <C.AddCard color={inputShowAdd? "#EBECF0" : "#7c7c83"} heigth={inputShowAdd? "auto" : "25px"}>
+            <C.AddCard color={inputShowAdd? "#EBECF0" : "#7c7c83"} >
 
                 {inputShowAdd && 
                     <>
@@ -35,7 +37,9 @@ const NewCard = () => {
                          type="text" 
                          placeholder="Insira o titulo do Cartão"
                          value={titleCard} 
-                         onChange={(event) => setTitleCard(event.target.value)}/>
+                         onChange={(e) => setTitleCard(e.target.value)}
+                         required
+                         />
 
                         <div className="btns">
                             <button 
@@ -46,7 +50,6 @@ const NewCard = () => {
                                 className="btnClose" 
                                 onClick={handleShowCard}>
                                 <GrClose style={{fontSize: "20px", color: "#fff"}}/></button>
-                        
                         </div>
                     </>
                 }

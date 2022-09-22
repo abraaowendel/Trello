@@ -18,7 +18,9 @@ const Home = () => {
                     ))}
                  </> 
                 }
-                <NewCard/>
+                {data.cards.length < 5 && 
+                    <NewCard/>
+                }
             </C.GridArea>
 
         </PageContainer>
