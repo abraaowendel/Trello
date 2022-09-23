@@ -26,7 +26,12 @@ export const slice = createSlice({
         setTask: (state, action) => {
             state.cards.map((item) => {
                 if(item.id === action.payload.id){
-                    item.tasks.push({id: uuidv4(), text: action.payload.text})
+                    item.tasks.push({
+                        id: uuidv4(), 
+                        text: action.payload.text, 
+                        option: action.payload.option, 
+                        editText: action.payload.editText
+                    })
                 }
             })
        },
@@ -55,11 +60,34 @@ export const slice = createSlice({
             })
         },
         setDeleteTask: (state, action) => {
-            state.cards.map((item) => {
+            let newTask = state.cards[action.payload.id].tasks.filter((item) => item.id !== action.payload.idTask)
+            state.cards[action.payload.id].tasks = newTask;
+            
+        },
+        setShowOptionsTask: (state, action) => {
+            state.cards[action.payload.idCard].tasks.map((item) => {
                 if(item.id === action.payload.id){
-                    let newTasks = [...item]
-                    newTasks.tasks.filter((item) => item.id != action.payload.idTask)
-                    item.tasks = newTasks
+                    item.option = !action.payload.option;
+                }
+            })
+        },
+        setEditTaskTitle: (state, action) => {
+            state.cards[action.payload.idCard].tasks.map((item) => {
+                if(item.id === action.payload.id){
+                    item.text = action.payload.text
+                }
+            })
+        },
+        setShowEdit: (state, action) => {
+            state.cards[action.payload.idCard].tasks.map((item) => {
+                if(item.id === action.payload.id){
+                    if(item.editText == true){
+                        item.editText = false
+                    }
+                    else{
+                        item.editText = true
+                        item.option = false;
+                    }
                 }
             })
         }
@@ -67,5 +95,5 @@ export const slice = createSlice({
 
 })
 
-export const {setCard, setNameCard, setDeleteCard, setTask, setShowOption, setDeleteAllTasks, setDeleteTask } = slice.actions;
+export const {setCard, setNameCard, setDeleteCard, setTask, setShowOption, setDeleteAllTasks, setDeleteTask, setShowOptionsTask, setEditTaskTitle, setShowEdit } = slice.actions;
 export default slice.reducer;

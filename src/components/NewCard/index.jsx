@@ -39,7 +39,6 @@ const NewCard = () => {
                          placeholder="Insira o titulo do Cartão"
                          value={titleCard} 
                          onChange={(e) => setTitleCard(e.target.value)}
-                         required
                          />
 
                         <div className="btns">

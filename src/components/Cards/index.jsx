@@ -40,7 +40,7 @@ const Card = (props) => {
 
     const handleAddNewTask = () => {
         if(textNewTask !== ""){
-            dispatch(setTask({id: props.idCard, text: textNewTask}))
+            dispatch(setTask({id: props.idCard, text: textNewTask, option: false, editText: true}))
         }
         handleShowInputAdd();
         setTextNewTask("")
@@ -53,7 +53,8 @@ const Card = (props) => {
     const handleIndex = () => {  
         for (let i = 0; i < data.cards.length; i++) {
             if(data.cards[i].id == props.idCard){
-                setIndex(i)
+               setIndex(i)
+               return;
             } 
         }
     }
@@ -67,7 +68,7 @@ const Card = (props) => {
 
             <C.CardTop>
                 <C.InputTitle 
-                    value={props.name}
+                    value={props.name}                  
                     onChange={handleChangeTitleCard}
                     />
                 <C.IconOptions onClick={handleOptionShow}>
@@ -77,7 +78,12 @@ const Card = (props) => {
         
             <C.TaskArea>
                 {props.tasks.map((item, key) => (
-                    <Tasks id={item.id} idCard={index} text={item.text} key={key}/>
+                    <Tasks id={item.id} 
+                     idCard={index}
+                     editText={item.editText} 
+                     option={item.option} 
+                     text={item.text} 
+                     key={key}/>
                 ))}
             </C.TaskArea>
 
