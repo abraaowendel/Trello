@@ -1,69 +1,83 @@
 import * as C from "./styles"
 
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Tasks from "../Tasks";
 import TextareaAutosize from 'react-textarea-autosize';
 
 import { FiMoreHorizontal } from "react-icons/fi"
-
 import { GrAdd, GrClose } from "react-icons/gr"
 
-import { setNameTask, setTask } from "../../redux/reducers/taskReducer";
+import { setNameCard, setTask, setShowOption} from "../../redux/reducers/taskReducer";
+
 import Options from "../Options";
 
 const Card = (props) => {
 
     const dispatch = useDispatch();
     const data = useSelector((state) => state.task)
-    const [optionsShow, setOptionsShow] = useState(false);
-
 
     const [inputShow, setInputShow] = useState(false);
     const [textNewTask, setTextNewTask] = useState("");
+    const [index, setIndex] = useState()
 
+    useEffect(() => {
+        handleIndex()
+    }, [data.cards])
 
     // MOSTRA E DESATIVA O ADICIONAR NOVA TAREFA
     const handleShowInputAdd = () => {
         setInputShow(!inputShow)
     }
 
-    const handleChangeTitleTask = (event) => {
+    const handleChangeTitleCard = (event) => {
         if(event.target.value != ""){
-            dispatch(setNameTask({text: event.target.value, id: props.idCard}))
+            dispatch(setNameCard({id: props.idCard, text: event.target.value}))
         }
     }
 
     const handleAddNewTask = () => {
         if(textNewTask !== ""){
-            dispatch(setTask({text: textNewTask, id: props.idCard}))
+            dispatch(setTask({id: props.idCard, text: textNewTask}))
         }
         handleShowInputAdd();
         setTextNewTask("")
     }
 
+    const handleOptionShow = () => {
+        dispatch(setShowOption({id: props.idCard, option:true}))
+    }
+
+    const handleIndex = () => {  
+        for (let i = 0; i < data.cards.length; i++) {
+            if(data.cards[i].id == props.idCard){
+                setIndex(i)
+            } 
+        }
+    }
+
     return (
         <C.Card>
 
-            {optionsShow && 
-                <Options/>
+            {data.cards[index]?.option &&
+               <Options idCard={props.idCard} index={index}/>
             }
 
             <C.CardTop>
                 <C.InputTitle 
                     value={props.name}
-                    onChange={handleChangeTitleTask}
+                    onChange={handleChangeTitleCard}
                     />
-                <C.IconOptions onClick={() => setOptionsShow(!optionsShow)}>
+                <C.IconOptions onClick={handleOptionShow}>
                     <FiMoreHorizontal/>
                 </C.IconOptions>
             </C.CardTop>
         
             <C.TaskArea>
                 {props.tasks.map((item, key) => (
-                    <Tasks id={item.id} text={item.text} key={key}/>
+                    <Tasks id={item.id} idCard={index} text={item.text} key={key}/>
                 ))}
             </C.TaskArea>
 

@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { OneOrAnother } from "../../helpers/OneOrAnother";
 import { setCard } from "../../redux/reducers/taskReducer";
 import * as C from "./styles"
+import { v4 as uuidv4 } from 'uuid';
 
 const NewCard = () => {
-
+    
     const [titleCard, setTitleCard] = useState("");
 
     const data = useSelector((state) => state.task)
@@ -16,7 +17,7 @@ const NewCard = () => {
 
     const handleNewCard = () => {
         if(titleCard != ""){
-            dispatch(setCard({id: data.cards.length + 1, name: titleCard}))
+            dispatch(setCard({id: uuidv4(), name: titleCard, tasks: [], option: false}))
         }
         handleShowCard();
         setTitleCard("");

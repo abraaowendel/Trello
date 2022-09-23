@@ -4,7 +4,6 @@ export const Card = styled.div`
     display: inline-block;
     height: 100%;
     vertical-align: top;
-    white-space: nowrap;
     width: 225px;
     position: relative;
     cursor: pointer;
@@ -40,7 +39,8 @@ export const NewTask = styled.button `
     }
 `
 export const TaskArea = styled.div `
-
+  display: flex;
+  flex-direction: column;
 `
 
 export const CardTop = styled.div `

@@ -1,7 +1,9 @@
-import { PageContainer } from "../../GlobalStyle";
 import * as C from "./styles"
-import Card from "../../components/Cards";
+
+import { PageContainer } from "../../GlobalStyle";
 import { useSelector } from "react-redux";
+
+import Card from "../../components/Cards";
 import NewCard from "../../components/NewCard";
 
 const Home = () => {
@@ -14,7 +16,7 @@ const Home = () => {
                 {data.cards &&
                  <>
                     {data.cards.map((item, key) => (
-                        <Card name={item.name} idCard={item.id - 1} tasks={item.tasks} key={key}/>
+                        <Card name={item.name} idCard={item.id} tasks={item.tasks} key={key}/>
                     ))}
                  </> 
                 }
